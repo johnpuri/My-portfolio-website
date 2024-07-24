@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #222;
+    background-color: #062954e1;
     border: none;
     border-radius: 0;
     margin-bottom: 0;
@@ -11,7 +11,7 @@
 }
 
 .navbar-brand {
-    color: #fff;
+    color: #6c0606;
     font-size: 30px;
     font-weight: 700;
     letter-spacing: 2px;

@@ -1,0 +1,133 @@
+/* ../css/CV.css */
+
+.a4-page {
+    background-color: beige;
+    max-width: 210mm;
+    max-height: calc(550mm - 50px);
+    padding: 20mm;
+    margin: 0 auto 75px;
+    border: 3px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @media print {
+    .a4-page {
+      border: 1px solid black;
+      border-top: 5px solid red;
+      margin-bottom: 5px;
+    }
+  }
+  
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .alert {
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+  }
+  
+  #course-name {
+    font-weight: bold;
+  }
+  
+  #header {
+    position: fixed;
+    z-index: 1;
+    height: 40px;
+    width: 52%;
+    background-color: #0792e5;
+    margin-bottom: 10px;
+    text-align: center;
+
+  }
+  
+  #header a {
+    float: right;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-family: "Times New Roman", sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  #header {
+    position: fixed;
+    top: 30mm; /* Match the top padding of .a4-page */
+    left: 25%; /* Match the left padding of .a4-page */
+    height: 30px;
+    background-color: #0792e5;
+    margin-bottom: 30px;
+    
+  }
+  
+  #header h1 {
+    float: left;
+    margin-left: 0; /* Remove left margin */
+    padding: 10px 0;
+    font-size: 18px; /* Slightly reduced font size */
+    font-family: "Times New Roman", sans-serif;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 200px); /* Adjust based on the space needed for the email */
+    
+  }
+  .header a {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Times New Roman", sans-serif;
+    color: #cf1111;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  .header1 {
+    text-align: center;
+    top: 6%;
+    margin: 0 50px; /* Reduced side margins */
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Times New Roman", sans-serif;
+  }
+
+  /* Large screens (desktop) */
+@media screen and (min-width: 1024px) {
+  #header {
+    top: 30mm;
+    height: 30px;
+    padding: 0 20px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  #header {
+    display: none;
+  }
+}
+
+/* Small screens (mobile) */
+@media screen and (max-width: 767px) {
+  #header {
+    display: none;
+  }
+}
