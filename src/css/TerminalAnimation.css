@@ -1,0 +1,132 @@
+.terminal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  padding: 8px 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+  margin-right: 15px;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-button.close {
+  background-color: #ff5f56;
+}
+
+.terminal-button.minimize {
+  background-color: #ffbd2e;
+}
+
+.terminal-button.maximize {
+  background-color: #27c93f;
+}
+
+.terminal-title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.terminal-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.terminal-line {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.terminal-prompt {
+  color: #00ff00;
+  margin-right: 8px;
+}
+
+.terminal-text {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  min-height: 1.5rem;
+  min-width: 5px;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background-color: #fff;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Animation for terminal appearance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.terminal-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animation for terminal disappearance */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.terminal-container.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
