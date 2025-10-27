@@ -181,7 +181,7 @@ const skills = [
     logoClass: 'skill-logo-github',
     snippet: 'name: Deploy to GCP\non: [push]\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2',
     name: 'GitHub',
-    info: 'DevOps engineer with advanced GitHub knowledge. Implemented CI/CD workflows with GitHub Actions for automated testing, building, and deployment to cloud platforms. Managed repositories with branching strategies (Git Flow, GitHub Flow) and implemented code review processes. Created automated dependency updates with Dependabot, utilized GitHub Packages for artifact storage, and implemented security scanning with CodeQL. Experienced with issue tracking and project management using GitHub Projects.',
+    info: 'DevOps engineer with advanced GitHub knowledge. Implemented CI/CD workflows with GitHub Actions for automated testing, building, and deployment to cloud platforms. Managed repositories with branching strategies (Git Flow, GitHub Flow) and implemented code review processes. Created automated dependency updates with Dependabot, utilized GitHub Packages for artifact storage, and implemented security scanning with CodeQL.',
     keyPoints: [
       'CI/CD Workflows with GitHub Actions',
       'Repository Management & Branching Strategies',

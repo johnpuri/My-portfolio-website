@@ -63,7 +63,7 @@ function Navbar() {
                 to="/school"
                 onClick={() => setIsOpen(false)}
               >
-                My School
+                Education
               </Link>
             </li>
             <li className="nav-item">
@@ -72,7 +72,7 @@ function Navbar() {
                 to="/cv"
                 onClick={() => setIsOpen(false)}
               >
-                My CV
+                Profile
               </Link>
             </li>
             <li className="nav-item">
@@ -81,7 +81,7 @@ function Navbar() {
                 to="/knowledge"
                 onClick={() => setIsOpen(false)}
               >
-                My Knowledge
+                Knowledge
               </Link>
             </li>
           </ul>
