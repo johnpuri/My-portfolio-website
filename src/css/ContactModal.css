@@ -119,18 +119,104 @@
   font-weight: 500;
 }
 
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-width: 450px;
+    padding: 1.75rem;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .social-links {
+    gap: 1.5rem;
+  }
+  
+  .social-icon {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .social-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .social-link span {
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 480px) {
+  .modal-overlay {
+    padding: 1rem;
+  }
+  
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .close-button {
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  
   .social-links {
     gap: 1rem;
+    flex-wrap: wrap;
   }
   
   .social-icon {
     width: 50px;
     height: 50px;
+    min-width: 50px; /* Touch-friendly */
+    min-height: 50px; /* Touch-friendly */
   }
   
   .social-icon svg {
     width: 25px;
     height: 25px;
+  }
+  
+  .social-link {
+    min-width: 80px;
+  }
+  
+  .social-link span {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal-content {
+    padding: 1.25rem;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .social-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .social-icon svg {
+    width: 22px;
+    height: 22px;
   }
 }

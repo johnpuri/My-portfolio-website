@@ -104,6 +104,7 @@ const skills = [
   {
     logo: javascriptLogo,
     logoClass: 'skill-logo-javascript',
+    // eslint-disable-next-line no-template-curly-in-string
     snippet: 'const greeting = () => {\n  const name = "World";\n  console.log(`Hello, ${name}!`);\n};\n\ngreeting();',
     name: 'JavaScript',
     info: 'Advanced JavaScript developer with 6+ years experience. Mastered ES6+ features including arrow functions, destructuring, async/await, and modules. Implemented complex asynchronous operations with Promises, created closures for data encapsulation, and utilized prototypal inheritance. Experienced with DOM manipulation, event handling, and AJAX for dynamic web applications. Proficient in functional programming concepts.',

@@ -356,46 +356,265 @@
   }
 }
 
+@media (max-width: 992px) {
+  .school-container {
+    padding: 1.5rem;
+  }
+  
+  .education-main-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .school-card {
+    width: 98%;
+    padding: 1.5rem;
+  }
+  
+  .school-name {
+    font-size: 1.6rem;
+  }
+  
+  .courses-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .school-container {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .section-title::after {
+    width: 50px;
+    height: 3px;
+  }
+  
+  .education-main-title {
+    font-size: 2rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .education-main-title::after {
+    width: 80px;
+    height: 3px;
+  }
+  
+  .school-card {
+    width: 100%;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
   .school-header {
     flex-direction: column;
     text-align: center;
+    margin-bottom: 1.25rem;
   }
   
   .school-logo-container {
     margin-right: 0;
     margin-bottom: 1rem;
+    width: 70px;
+    height: 70px;
+  }
+  
+  .towson-logo::after,
+  .montgomery-logo::after {
+    font-size: 1.6rem;
+  }
+  
+  .school-info {
+    width: 100%;
+  }
+  
+  .school-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .school-degree {
+    font-size: 1rem;
+  }
+  
+  .school-years {
+    font-size: 0.85rem;
   }
   
   .school-actions {
     flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+  
+  .school-website-btn,
+  .school-courses-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    min-height: 44px; /* Touch-friendly */
+    font-size: 0.9rem;
+  }
+  
+  .courses-container {
+    margin-top: 0.75rem;
+    width: 100%;
+  }
+  
+  .course-category {
+    margin-bottom: 1.5rem;
+  }
+  
+  .category-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.875rem;
   }
   
   .courses-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .course-card {
+    padding: 1rem;
+  }
+  
+  .course-card h4 {
+    font-size: 0.95rem;
+  }
+  
+  .course-card h5 {
+    font-size: 1rem;
+  }
+  
+  .course-card p {
+    font-size: 0.85rem;
+  }
+  
+  .section {
+    height: auto;
+    min-height: 50vh;
+    padding: 0.1rem;
   }
 }
-  
-  .font-bold {
-    font-weight: bold;
-  }
-  
-  .mb-8 {
-    margin-bottom: 2rem;
-  }
 
-  
-  @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
+@media (max-width: 480px) {
+  .school-container {
+    padding: 0.75rem;
   }
   
-  @media (max-width: 768px) {
+  .section-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
   
-    .section {
-      height: auto;
-      min-height: 50vh;
-      padding: 0.1rem;
-    }
+  .section-title::after {
+    width: 40px;
+    height: 3px;
+  }
+  
+  .education-main-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .education-main-title::after {
+    width: 70px;
+    height: 3px;
+  }
+  
+  .school-card {
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .school-logo-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .towson-logo::after,
+  .montgomery-logo::after {
+    font-size: 1.4rem;
+  }
+  
+  .school-name {
+    font-size: 1.3rem;
+  }
+  
+  .school-degree {
+    font-size: 0.95rem;
+  }
+  
+  .school-years {
+    font-size: 0.8rem;
+  }
+  
+  .school-actions {
+    gap: 0.625rem;
+  }
+  
+  .school-website-btn,
+  .school-courses-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+  }
+  
+  .category-title {
+    font-size: 1.1rem;
+  }
+  
+  .course-card {
+    padding: 0.875rem;
+  }
+  
+  .course-card h4 {
+    font-size: 0.9rem;
+  }
+  
+  .course-card h5 {
+    font-size: 0.95rem;
+  }
+  
+  .course-card p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 360px) {
+  .school-container {
+    padding: 0.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .education-main-title {
+    font-size: 1.5rem;
+  }
+  
+  .school-card {
+    padding: 0.875rem;
+  }
+  
+  .school-name {
+    font-size: 1.2rem;
+  }
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
 }
