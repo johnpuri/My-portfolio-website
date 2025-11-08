@@ -38,7 +38,7 @@ function Navbar() {
           John's Portfolio
         </Link>
         <button 
-          className="navbar-toggler" 
+          className={`navbar-toggler ${isOpen ? 'open' : ''}`} 
           type="button" 
           onClick={toggleMenu}
           aria-expanded={isOpen ? "true" : "false"}
