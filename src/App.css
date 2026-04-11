@@ -1,19 +1,12 @@
+/* App Shell */
 .App {
-  text-align: center;
-  position: relative;
   min-height: 100vh;
+  background-color: var(--bg-primary);
+  position: relative;
 }
 
 .app-content {
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  width: 100%;
-  height: 100%;
-}
-
-.app-content.visible {
-  opacity: 1;
-  pointer-events: auto;
+  min-height: 100vh;
 }
 
 .app-content.hidden {
@@ -21,37 +14,18 @@
   pointer-events: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-content.visible {
+  opacity: 1;
+  animation: fadeInApp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@keyframes fadeInApp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Page content sits above 3D canvas */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
 }
