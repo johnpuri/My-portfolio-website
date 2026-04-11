@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,7 +13,6 @@
     "react-intersection-observer": "^10.0.3",
     "react-router-dom": "^6.25.1",
     "react-scripts": "^5.0.1",
-    "three": "^0.183.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
