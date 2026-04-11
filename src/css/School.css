@@ -1,620 +1,273 @@
-/* ../css/School.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+/* =============================================
+   SCHOOL / EDUCATION PAGE
+   ============================================= */
 
-:root {
-  --primary-color: #61dafb;
-  --secondary-color: #282c34;
-  --accent-color: #ff6b6b;
-  --text-color: #f5f5f5;
-  --light-text: #a0aec0;
-  --background-color: #1a1a1a;
-  --card-bg: rgba(60, 64, 72, 0.8);
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --towson-color: #ffb81c;
-  --montgomery-color: #652d90;
-  --tech-blue: #0070f3;
-  --tech-purple: #7928ca;
-  --tech-cyan: #00c7b7;
-  --dark-bg: #1a1a1a;
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.25);
+.school-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-top: 80px;
 }
 
-/* Tech Background Elements */
-.tech-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+.school-hero {
+  position: relative;
+  padding: 80px 40px 50px;
+  text-align: center;
   overflow: hidden;
 }
 
-.animated-grid {
+.school-hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(15, 23, 42, 0.9) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.9) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: center center;
-  animation: gridMove 20s linear infinite;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 40% 0%, rgba(108, 99, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 0%, rgba(0, 212, 255, 0.12) 0%, transparent 45%);
+  pointer-events: none;
 }
 
-.code-rain {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(7, 89, 133, 0.15), transparent 70%);
-  opacity: 0.5;
+.school-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-top: -40px;
+  margin-bottom: 60px;
 }
 
-@keyframes gridMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 40px 40px;
-  }
-}
-
-/* Section Title Styles */
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  text-align: center;
-  position: relative;
-  display: block;
-  width: 100%;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  border-radius: 2px;
-}
-
-.school-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.education-main-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 2.5rem;
-  color: var(--text-color);
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  position: relative;
-}
-
-.education-main-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  border-radius: 2px;
-}
-
-.school-card {
-  background-color: rgba(80, 84, 92, 0.8);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px var(--shadow-color);
-  margin-bottom: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 95%;
+.school-cards-wrap {
   max-width: 1000px;
-  text-align: center;
+  margin: 0 auto;
+  padding: 0 40px 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 36px;
+}
+
+/* ---- School Card ---- */
+.school-card {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
 }
 
 .school-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(108, 99, 255, 0.2);
 }
 
-.school-card.towson {
-  border-top: 5px solid var(--towson-color);
-}
-
-.school-card.montgomery {
-  border-top: 5px solid var(--montgomery-color);
+.school-card-accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--school-accent, #6c63ff), transparent);
 }
 
 .school-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  gap: 24px;
+  padding: 32px 32px 0;
 }
 
-.school-logo-container {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  margin-right: 1.5rem;
-  border-radius: 50%;
-  overflow: hidden;
+/* School badge logo */
+.school-logo-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
 }
 
-.school-logo {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
+.towson-badge {
+  background: linear-gradient(135deg, rgba(255, 195, 0, 0.2), rgba(255, 195, 0, 0.05));
+  border: 1px solid rgba(255, 195, 0, 0.3);
+  color: #ffc300;
 }
 
-.towson-logo {
-  background-color: var(--towson-color);
-  position: relative;
+.montgomery-badge {
+  background: linear-gradient(135deg, rgba(0, 163, 224, 0.2), rgba(0, 163, 224, 0.05));
+  border: 1px solid rgba(0, 163, 224, 0.3);
+  color: #00a3e0;
 }
 
-.towson-logo::after {
-  content: 'TU';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
+.school-initial {
+  display: block;
 }
 
-.montgomery-logo {
-  background-color: var(--montgomery-color);
-  position: relative;
-}
-
-.montgomery-logo::after {
-  content: 'MC';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
- }
-
-.school-info {
-  flex-grow: 1;
-  text-align: center;
-}
+.school-info { flex: 1; }
 
 .school-name {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
 }
 
 .school-degree {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--light-text);
-  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
 }
 
 .school-years {
-  font-size: 0.9rem;
-  color: var(--light-text);
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: rgba(108, 99, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  color: var(--accent-primary);
 }
 
+/* ---- Actions ---- */
 .school-actions {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  justify-content: center;
-}
-
-.school-website-btn, .school-courses-btn {
-  padding: 0.75rem 1.25rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-  outline: none;
+  gap: 12px;
+  padding: 20px 32px 28px;
+  flex-wrap: wrap;
 }
 
 .school-website-btn {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  color: white;
-  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border: 1px solid var(--border-glass);
+  background: transparent;
+  transition: all 0.2s ease;
 }
 
 .school-website-btn:hover {
-  box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4);
-  transform: translateY(-2px);
+  color: var(--text-primary);
+  border-color: rgba(108, 99, 255, 0.4);
+  background: rgba(108, 99, 255, 0.08);
 }
 
 .school-courses-btn {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  color: white;
-  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(108, 99, 255, 0.12);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
 }
 
 .school-courses-btn:hover {
-  box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4);
-  transform: translateY(-2px);
+  background: rgba(108, 99, 255, 0.2);
+  border-color: var(--accent-primary);
 }
 
-.courses-container {
-  margin-top: 1rem;
-  animation: fadeIn 0.5s ease-in-out;
+.chevron {
+  display: inline-block;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
 }
 
-.course-category {
-  margin-bottom: 2rem;
-  text-align: center;
+.chevron.up { transform: rotate(-90deg); }
+.chevron.down { transform: rotate(90deg); }
+
+/* ---- Expanded Courses ---- */
+.courses-expanded {
+  padding: 4px 32px 32px;
+  border-top: 1px solid var(--border-glass);
+  margin: 0 0 0 0;
 }
+
+.course-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 24px;
+}
+
+.course-category {}
 
 .category-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e2e8f0;
-  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-glass);
 }
 
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
 }
 
 .course-card {
-  background-color: #f8fafc;
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
+  padding: 16px 20px;
+  transition: all 0.2s ease;
 }
 
 .course-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-color: rgba(108, 99, 255, 0.3);
+  transform: translateY(-2px);
 }
 
-.course-card h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  margin-bottom: 0.25rem;
+.course-code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: rgba(108, 99, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 4px;
+  color: var(--accent-primary);
+  margin-bottom: 8px;
 }
 
-.course-card h5 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #000000;
-  margin-bottom: 0.75rem;
+.course-name {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.3;
 }
 
-.course-card p {
-  font-size: 0.9rem;
-  color: #000000;
+.course-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
   line-height: 1.5;
+  margin: 0;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 992px) {
-  .school-container {
-    padding: 1.5rem;
-  }
-  
-  .education-main-title {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .school-card {
-    width: 98%;
-    padding: 1.5rem;
-  }
-  
-  .school-name {
-    font-size: 1.6rem;
-  }
-  
-  .courses-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .school-container {
-    padding: 1rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .section-title::after {
-    width: 50px;
-    height: 3px;
-  }
-  
-  .education-main-title {
-    font-size: 2rem;
-    margin-bottom: 1.75rem;
-  }
-  
-  .education-main-title::after {
-    width: 80px;
-    height: 3px;
-  }
-  
-  .school-card {
-    width: 100%;
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .school-header {
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 1.25rem;
-  }
-  
-  .school-logo-container {
-    margin-right: 0;
-    margin-bottom: 1rem;
-    width: 70px;
-    height: 70px;
-  }
-  
-  .towson-logo::after,
-  .montgomery-logo::after {
-    font-size: 1.6rem;
-  }
-  
-  .school-info {
-    width: 100%;
-  }
-  
-  .school-name {
-    font-size: 1.5rem;
-    margin-bottom: 0.4rem;
-  }
-  
-  .school-degree {
-    font-size: 1rem;
-  }
-  
-  .school-years {
-    font-size: 0.85rem;
-  }
-  
-  .school-actions {
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    margin-bottom: 1.25rem;
-  }
-  
-  .school-website-btn,
-  .school-courses-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 0.875rem 1.5rem;
-    min-height: 44px; /* Touch-friendly */
-    font-size: 0.9rem;
-  }
-  
-  .courses-container {
-    margin-top: 0.75rem;
-    width: 100%;
-  }
-  
-  .course-category {
-    margin-bottom: 1.5rem;
-  }
-  
-  .category-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.875rem;
-  }
-  
-  .courses-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .course-card {
-    padding: 1rem;
-  }
-  
-  .course-card h4 {
-    font-size: 0.95rem;
-  }
-  
-  .course-card h5 {
-    font-size: 1rem;
-  }
-  
-  .course-card p {
-    font-size: 0.85rem;
-  }
-  
-  .section {
-    height: auto;
-    min-height: 50vh;
-    padding: 0.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .school-container {
-    padding: 0.75rem;
-  }
-  
-  .section-title {
-    font-size: 1.75rem;
-    margin-bottom: 1.75rem;
-  }
-  
-  .section-title::after {
-    width: 40px;
-    height: 3px;
-  }
-  
-  .education-main-title {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .education-main-title::after {
-    width: 70px;
-    height: 3px;
-  }
-  
-  .school-card {
-    padding: 1rem;
-    margin-bottom: 1.25rem;
-  }
-  
-  .school-logo-container {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .towson-logo::after,
-  .montgomery-logo::after {
-    font-size: 1.4rem;
-  }
-  
-  .school-name {
-    font-size: 1.3rem;
-  }
-  
-  .school-degree {
-    font-size: 0.95rem;
-  }
-  
-  .school-years {
-    font-size: 0.8rem;
-  }
-  
-  .school-actions {
-    gap: 0.625rem;
-  }
-  
-  .school-website-btn,
-  .school-courses-btn {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.85rem;
-  }
-  
-  .category-title {
-    font-size: 1.1rem;
-  }
-  
-  .course-card {
-    padding: 0.875rem;
-  }
-  
-  .course-card h4 {
-    font-size: 0.9rem;
-  }
-  
-  .course-card h5 {
-    font-size: 0.95rem;
-  }
-  
-  .course-card p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-  }
-}
-
-@media (max-width: 360px) {
-  .school-container {
-    padding: 0.5rem;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-  }
-  
-  .education-main-title {
-    font-size: 1.5rem;
-  }
-  
-  .school-card {
-    padding: 0.875rem;
-  }
-  
-  .school-name {
-    font-size: 1.2rem;
-  }
-}
-
-.font-bold {
-  font-weight: bold;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
+  .school-cards-wrap { padding: 0 20px 80px; }
+  .school-hero { padding: 60px 20px 30px; }
+  .school-header { flex-direction: column; text-align: center; }
+  .school-actions { padding: 16px 20px 24px; }
+  .courses-expanded { padding: 4px 20px 24px; }
 }

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import '../css/Knowledge.css';
 
 import pythonLogo from '../assets/logos/python.svg';
@@ -12,210 +14,158 @@ import reactLogo from '../assets/logos/react.svg';
 import javascriptLogo from '../assets/logos/javascript.svg';
 import javaLogo from '../assets/logos/java.svg';
 
-const SkillCard = ({ logo, logoClass, snippet, name, info, keyPoints = [], purpose = "" }) => {
-  return (
-    <article className="skill-card">
-      <header className="skill-logo-container">
-        <img src={logo} alt={`${name} logo`} className={`skill-logo ${logoClass}`} />
-      </header>
-      <pre className="skill-snippet"><code>{snippet}</code></pre>
-      <section className="skill-content">
-        <h3 className="skill-name">{name}</h3>
-        <p className="skill-info">{info}</p>
-        {keyPoints.length > 0 && (
-          <ul className="skill-key-points">
-            {keyPoints.map((point, index) => (
-              <li key={index}>{point}</li>
-            ))}
-          </ul>
-        )}
-        {purpose && (
-          <div className="skill-purpose">
-            <h4 className="purpose-title">Why I Use This</h4>
-            <p className="purpose-text">{purpose}</p>
-          </div>
-        )}
-      </section>
-    </article>
-  );
-};
-
 const skills = [
   {
-    logo: javaLogo,
-    logoClass: 'skill-logo-java',
-    snippet: 'public class HelloWorld {\n  public static void main\n(String[] args) {\n    System.out.println("Hello, \nWorld!");\n  }\n}',
-    name: 'Java',
-    info: 'Object-oriented programming language with 7+ years of experience. Developed enterprise applications using Java 8-17 features including streams, lambdas, and concurrency. Built microservices with Spring framework and created Android applications. Implemented design patterns like Singleton, Factory, and Observer for robust architecture.',
-    keyPoints: [
-      'Enterprise Application Development',
-      'Microservices Architecture',
-      'Android Development',
-      'Design Patterns Implementation',
-      'Multithreading & Concurrency'
-    ],
-    purpose: 'I rely on Java for building robust, scalable enterprise applications that require strong type safety and performance. Its platform independence allows me to deploy solutions across different environments, while its extensive ecosystem provides libraries for virtually any task. Java\'s object-oriented nature helps me create maintainable, modular code for complex business requirements.'
+    logo: javaLogo, logoClass: 'skill-logo-java', name: 'Java', color: '#f89820',
+    snippet: 'public class Hello {\n  public static void\n  main(String[] args) {\n    System.out.println\n    ("Hello!");\n  }\n}',
+    info: 'Object-oriented language with 7+ years experience. Enterprise apps using Java 8-17, streams, lambdas, concurrency.',
+    keyPoints: ['Enterprise Application Dev', 'Microservices Architecture', 'Android Development', 'Design Patterns', 'Multithreading'],
+    purpose: 'Java is my primary language for robust, scalable enterprise apps requiring strong type safety and high performance.',
   },
   {
-    logo: springLogo,
-    logoClass: 'skill-logo-spring',
-    snippet: '@RestController\npublic class HelloController {\n    @GetMapping("/hello")\n    public String hello() {\n        return "Hello, World!";\n    }\n}',
-    name: 'Spring Boot',
-    info: 'Java framework expert with 5+ years experience. Developed RESTful APIs with Spring Boot, implemented security using Spring Security with JWT authentication, and created microservices with Spring Cloud. Integrated with JPA/Hibernate for database operations and used Spring Data for repository management. Implemented dependency injection and AOP for clean, maintainable code.',
-    keyPoints: [
-      'RESTful API Development',
-      'Spring Security & JWT Authentication',
-      'Microservices with Spring Cloud',
-      'JPA/Hibernate Integration',
-      'Dependency Injection & AOP'
-    ],
-    purpose: 'Spring Boot accelerates my development process by eliminating boilerplate code and providing convention-over-configuration. I use it to rapidly build production-ready microservices and APIs with built-in security features. Its dependency injection framework helps me create loosely coupled components, while Spring Cloud simplifies distributed system challenges.'
+    logo: springLogo, logoClass: 'skill-logo-spring', name: 'Spring Boot', color: '#6db33f',
+    snippet: '@RestController\npublic class Hello {\n  @GetMapping("/hello")\n  public String hello() {\n    return "Hello!";\n  }\n}',
+    info: 'Java framework expert with 5+ years. RESTful APIs, Spring Security, JWT authentication, microservices.',
+    keyPoints: ['RESTful API Development', 'Spring Security & JWT', 'Microservices / Spring Cloud', 'JPA/Hibernate', 'Dependency Injection & AOP'],
+    purpose: 'Spring Boot accelerates development by eliminating boilerplate, providing production-ready APIs with built-in security.',
   },
   {
-    logo: reactLogo,
-    logoClass: 'skill-logo-react',
-    snippet: 'function App() {\n  return (\n    <div className="App">\n      <h1>Hello, World!</h1>\n    </div>\n  );\n}',
-    name: 'React',
-    info: 'Frontend development with 4+ years React experience. Built responsive SPAs using functional components and hooks (useState, useEffect, useContext, useReducer). Implemented state management with Redux and Context API, created custom hooks for reusable logic, and optimized performance with React.memo and useMemo. Experienced with React Router for navigation and Axios for API integration.',
-    keyPoints: [
-      'Single Page Applications (SPAs)',
-      'Redux & Context API State Management',
-      'Custom Hooks Development',
-      'Performance Optimization',
-      'React Router & API Integration'
-    ],
-    purpose: 'React enables me to create dynamic, responsive user interfaces with a component-based architecture that promotes reusability. Its virtual DOM efficiently updates only what needs to change, resulting in better performance. I leverage React\'s ecosystem to build complex frontends that provide excellent user experiences across devices.'
+    logo: reactLogo, logoClass: 'skill-logo-react', name: 'React', color: '#61dafb',
+    snippet: 'function App() {\n  return (\n    <div>\n      <h1>Hello!</h1>\n    </div>\n  );\n}',
+    info: '4+ years React experience. SPAs with hooks, Redux, Context API, React Router, and Axios API integration.',
+    keyPoints: ['Single Page Applications', 'Redux & Context API', 'Custom Hooks', 'Performance Optimization', 'React Router'],
+    purpose: 'React enables dynamic UIs with its component-based architecture and virtual DOM for excellent performance.',
   },
   {
-    logo: gcpLogo,
-    logoClass: 'skill-logo-gcp',
-    snippet: '# Deploy to Cloud Run\ngcloud run deploy --source .\n--platform managed\n--region us-central1',
-    name: 'Google Cloud Platform',
-    info: 'Cloud architect with extensive GCP experience. Deployed containerized applications to Cloud Run and GKE, managed databases with Cloud SQL (PostgreSQL), and implemented CI/CD pipelines. Utilized IAM for security, Cloud Storage for file management, and Pub/Sub for event-driven architecture. Configured load balancing, auto-scaling, and implemented monitoring with Cloud Monitoring and Logging.',
-    keyPoints: [
-      'Cloud Run & GKE Deployments',
-      'Cloud SQL & Database Management',
-      'IAM & Security Implementation',
-      'Event-driven Architecture with Pub/Sub',
-      'Load Balancing & Auto-scaling'
-    ],
-    purpose: 'GCP provides the infrastructure backbone for my applications, allowing me to focus on development rather than operations. I utilize its serverless options to reduce maintenance overhead and costs. GCP\'s global network ensures low-latency access for users worldwide, while its security features help me protect sensitive data and comply with regulations.'
+    logo: gcpLogo, logoClass: 'skill-logo-gcp', name: 'Google Cloud Platform', color: '#4285f4',
+    snippet: '# Deploy to Cloud Run\ngcloud run deploy \\\n  --source . \\\n  --platform managed \\\n  --region us-central1',
+    info: 'Cloud architect with extensive GCP. Deployed to Cloud Run, GKE, managed Cloud SQL, CI/CD pipelines, IAM.',
+    keyPoints: ['Cloud Run & GKE', 'Cloud SQL & Databases', 'IAM & Security', 'Pub/Sub Event-driven', 'Load Balancing & Scaling'],
+    purpose: 'GCP provides the infrastructure backbone, allowing me to focus on development over operations.',
   },
   {
-    logo: javascriptLogo,
-    logoClass: 'skill-logo-javascript',
+    logo: javascriptLogo, logoClass: 'skill-logo-javascript', name: 'JavaScript', color: '#f7df1e',
     // eslint-disable-next-line no-template-curly-in-string
-    snippet: 'const greeting = () => {\n  const name = "World";\n  console.log(`Hello, ${name}!`);\n};\n\ngreeting();',
-    name: 'JavaScript',
-    info: 'Advanced JavaScript developer with 6+ years experience. Mastered ES6+ features including arrow functions, destructuring, async/await, and modules. Implemented complex asynchronous operations with Promises, created closures for data encapsulation, and utilized prototypal inheritance. Experienced with DOM manipulation, event handling, and AJAX for dynamic web applications. Proficient in functional programming concepts.',
-    keyPoints: [
-      'ES6+ Features & Modern JavaScript',
-      'Asynchronous Programming with Promises',
-      'Closures & Prototypal Inheritance',
-      'DOM Manipulation & Event Handling',
-      'Functional Programming Concepts'
-    ],
-    purpose: 'JavaScript is essential for creating interactive web experiences and is the foundation of my frontend development. Its versatility allows me to work across the entire stack with Node.js. I leverage modern JavaScript features to write clean, maintainable code that runs efficiently in browsers and servers alike.'
+    snippet: 'const greet = async () => {\n  const name = "World";\n  console.log(`Hello, ${name}!`);\n};\ngreet();',
+    info: '6+ years. ES6+ features, async/await, Promises, closures, DOM manipulation and functional programming.',
+    keyPoints: ['ES6+ Modern JS', 'Async / Promises', 'Closures & Prototypes', 'DOM Manipulation', 'Functional Programming'],
+    purpose: 'JavaScript is the foundation of my frontend work and versatile enough for full-stack with Node.js.',
   },
   {
-    logo: pythonLogo,
-    logoClass: 'skill-logo-python',
-    snippet: 'def hello_world():\n    print("Hello, World!")',
-    name: 'Python',
-    info: 'Python developer with 4+ years experience across multiple domains. Implemented data analysis pipelines with NumPy, Pandas, and Matplotlib. Developed machine learning models using TensorFlow, Keras, and scikit-learn. Built web applications with Django and Flask frameworks. Created automation scripts for ETL processes and utilized Python for backend API development with FastAPI.',
-    keyPoints: [
-      'Data Analysis with NumPy & Pandas',
-      'Machine Learning with TensorFlow & scikit-learn',
-      'Web Development with Django & Flask',
-      'ETL Process Automation',
-      'API Development with FastAPI'
-    ],
-    purpose: 'Python\'s simplicity and readability make it my go-to language for data analysis and machine learning projects. Its extensive libraries like NumPy and Pandas help me process and visualize complex datasets efficiently. For automation tasks, Python\'s straightforward syntax allows me to quickly create scripts that save time and reduce manual work.'
+    logo: pythonLogo, logoClass: 'skill-logo-python', name: 'Python', color: '#3776ab',
+    snippet: 'def hello_world():\n    print("Hello, World!")\n\nhello_world()',
+    info: '4+ years. Data pipelines with NumPy/Pandas, ML with TensorFlow/scikit-learn, Django, Flask, FastAPI.',
+    keyPoints: ['Data Analysis: NumPy/Pandas', 'ML: TensorFlow/scikit-learn', 'Django & Flask', 'ETL Automation', 'FastAPI'],
+    purpose: "Python's simplicity makes it my go-to for data analysis, ML, and automation scripts.",
   },
   {
-    logo: mysqlLogo,
-    logoClass: 'skill-logo-mysql',
-    snippet: 'SELECT * FROM users\nWHERE status = "active"\nORDER BY created_at DESC;',
-    name: 'MySQL',
-    info: 'Database expert with 5+ years MySQL experience. Designed normalized database schemas, optimized complex queries for performance, and implemented indexing strategies. Created stored procedures, triggers, and views for business logic. Managed database migrations, implemented backup and recovery procedures, and ensured data integrity with constraints. Experienced with database replication and clustering for high availability.',
-    keyPoints: [
-      'Database Schema Design & Normalization',
-      'Query Optimization & Indexing',
-      'Stored Procedures, Triggers & Views',
-      'Database Migration & Maintenance',
-      'Replication & High Availability'
-    ],
-    purpose: 'MySQL provides the reliable data storage foundation for my applications, with ACID compliance ensuring data integrity. I use it for projects requiring complex relationships between data and transactions. Its maturity means excellent documentation, community support, and proven performance at scale, making it ideal for business-critical applications.'
+    logo: mysqlLogo, logoClass: 'skill-logo-mysql', name: 'MySQL', color: '#00618a',
+    snippet: 'SELECT * FROM users\nWHERE status = "active"\nORDER BY created_at DESC\nLIMIT 50;',
+    info: '5+ years. Schema design, query optimization, indexing, stored procedures, triggers, replication.',
+    keyPoints: ['Schema Design & Normalization', 'Query Optimization', 'Stored Procedures & Triggers', 'Migrations', 'High Availability'],
+    purpose: 'MySQL provides reliable, ACID-compliant data storage for complex relational data in business-critical apps.',
   },
   {
-    logo: nodeLogo,
-    logoClass: 'skill-logo-node',
-    snippet: 'const express = require("express");\nconst app = express();\n\napp.get("/hello", (req, res) => {\n    res.send("Hello, World!");\n});\n\napp.listen(3000);',
-    name: 'Node.js',
-    info: 'Backend developer with 4+ years Node.js experience. Built scalable RESTful APIs with Express.js, implemented real-time applications using Socket.io, and created GraphQL APIs with Apollo Server. Utilized middleware for authentication, validation, and error handling. Integrated with MongoDB using Mongoose and implemented caching with Redis. Experienced with event-driven architecture and asynchronous programming patterns.',
-    keyPoints: [
-      'RESTful API Development with Express.js',
-      'Real-time Applications with Socket.io',
-      'GraphQL API Implementation',
-      'MongoDB Integration with Mongoose',
-      'Caching Strategies with Redis'
-    ],
-    purpose: 'Node.js enables me to use JavaScript across the entire stack, streamlining development and allowing code sharing between frontend and backend. Its event-driven, non-blocking architecture makes it perfect for building high-throughput APIs and real-time applications. The vast npm ecosystem provides ready-made solutions for common development challenges.'
+    logo: nodeLogo, logoClass: 'skill-logo-node', name: 'Node.js', color: '#339933',
+    snippet: 'const express = require("express");\nconst app = express();\n\napp.get("/", (req, res) =>\n  res.send("Hello!"));\n\napp.listen(3000);',
+    info: '4+ years. RESTful APIs with Express, real-time with Socket.io, GraphQL, MongoDB/Mongoose, Redis caching.',
+    keyPoints: ['REST APIs with Express.js', 'Socket.io Real-time', 'GraphQL / Apollo', 'MongoDB / Mongoose', 'Redis Caching'],
+    purpose: 'Node.js lets me use JavaScript across the entire stack for consistent, high-throughput backend services.',
   },
   {
-    logo: vertexaiLogo,
-    logoClass: 'skill-logo-vertexai',
-    snippet: 'from google.cloud import aiplatform\n\nendpoint = aiplatform.Endpoint\n(endpoint_name)\nprediction = endpoint.predict\n(instances=instances)',
-    name: 'Vertex AI',
-    info: 'AI/ML specialist with Vertex AI expertise. Trained and deployed custom machine learning models on Google\'s Vertex AI platform. Implemented AutoML for tabular data, image classification, and natural language processing tasks. Created prediction endpoints for real-time inference, utilized feature store for feature management, and implemented MLOps practices with Vertex AI Pipelines. Experienced with model monitoring and continuous training.',
-    keyPoints: [
-      'Custom ML Model Training & Deployment',
-      'AutoML for Various Data Types',
-      'Real-time Inference Endpoints',
-      'Feature Store Management',
-      'MLOps with Vertex AI Pipelines'
-    ],
-    purpose: 'Vertex AI allows me to build and deploy machine learning models at scale without managing complex infrastructure. I use it to create intelligent features in applications, from recommendation systems to natural language processing. Its AutoML capabilities help me deliver ML solutions even for specialized domains where I might not have deep expertise.'
+    logo: vertexaiLogo, logoClass: 'skill-logo-vertexai', name: 'Vertex AI', color: '#4285f4',
+    snippet: 'from google.cloud import aiplatform\n\nendpoint = aiplatform\n  .Endpoint(endpoint_name)\nprediction = endpoint\n  .predict(instances)',
+    info: 'AI/ML specialist on Vertex AI. Trained/deployed custom ML models, AutoML, real-time inference, MLOps pipelines.',
+    keyPoints: ['Custom ML Training & Deploy', 'AutoML for Various Data', 'Real-time Inference', 'Feature Store', 'Vertex AI Pipelines'],
+    purpose: 'Vertex AI lets me build and deploy ML models at scale without managing complex infrastructure.',
   },
   {
-    logo: githubLogo,
-    logoClass: 'skill-logo-github',
-    snippet: 'name: Deploy to GCP\non: [push]\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2',
-    name: 'GitHub',
-    info: 'DevOps engineer with advanced GitHub knowledge. Implemented CI/CD workflows with GitHub Actions for automated testing, building, and deployment to cloud platforms. Managed repositories with branching strategies (Git Flow, GitHub Flow) and implemented code review processes. Created automated dependency updates with Dependabot, utilized GitHub Packages for artifact storage, and implemented security scanning with CodeQL.',
-    keyPoints: [
-      'CI/CD Workflows with GitHub Actions',
-      'Repository Management & Branching Strategies',
-      'Automated Dependency Updates',
-      'Security Scanning with CodeQL',
-      'Project Management with GitHub Projects'
-    ],
-    purpose: 'GitHub is central to my development workflow, providing version control and collaboration tools that keep projects organized. I leverage GitHub Actions to automate testing and deployment, ensuring consistent quality and faster releases. Its project management features help me track progress and coordinate with team members, while security tools like CodeQL help identify vulnerabilities early.'
-  }
+    logo: githubLogo, logoClass: 'skill-logo-github', name: 'GitHub', color: '#ffffff',
+    snippet: 'name: Deploy to GCP\non: [push]\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: checkout@v3',
+    info: 'CI/CD with GitHub Actions, branching strategies (Git Flow), Dependabot, CodeQL security scanning.',
+    keyPoints: ['CI/CD GitHub Actions', 'Repo Management & Branching', 'Automated Dependency Updates', 'CodeQL Security', 'GitHub Projects'],
+    purpose: 'GitHub is central to my workflow, automating testing and deployment while keeping teams aligned.',
+  },
 ];
+
+/* ---- Flip Card ---- */
+function FlipCard({ skill, delay }) {
+  const [flipped, setFlipped] = useState(false);
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="flip-card-container"
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.4, 0, 0.2, 1] }}
+      onClick={() => setFlipped(!flipped)}
+    >
+      <div className={`flip-card ${flipped ? 'flipped' : ''}`}>
+        {/* Front */}
+        <div className="flip-front glass-card">
+          <div className="flip-front-glow" style={{ '--card-color': skill.color }} />
+          <div className="card-logo-wrap">
+            <img
+              src={skill.logo}
+              alt={`${skill.name} logo`}
+              className={`card-logo ${skill.logoClass}`}
+            />
+          </div>
+          <h3 className="card-name">{skill.name}</h3>
+          <div className="key-points-preview">
+            {skill.keyPoints.slice(0, 3).map((pt, i) => (
+              <span key={i} className="key-tag">{pt}</span>
+            ))}
+          </div>
+          <p className="flip-hint">Click to explore ↩</p>
+        </div>
+
+        {/* Back */}
+        <div className="flip-back glass-card">
+          <div className="back-header">
+            <img src={skill.logo} alt="" className="back-logo" />
+            <h3>{skill.name}</h3>
+          </div>
+          <pre className="code-snippet"><code>{skill.snippet}</code></pre>
+          <p className="back-info">{skill.info}</p>
+          <p className="flip-hint" style={{marginTop: 'auto'}}>Click to flip back ↩</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 function Knowledge() {
   return (
-    <section className="skills-section">
-      <header className="tech-background">
-        <span className="animated-grid"></span>
-        <span className="code-rain"></span>
-      </header>
-      
-      <h2 className="section-title">Technical <span className="highlight">Knowledge</span></h2>
-      
-      <main className="skills-grid">
-        {skills.map((skill, index) => (
-          <SkillCard 
-            key={index}
-            logo={skill.logo}
-            logoClass={skill.logoClass}
-            snippet={skill.snippet}
-            name={skill.name}
-            info={skill.info}
-          />
+    <section className="knowledge-page">
+      {/* Page header */}
+      <div className="knowledge-hero">
+        <div className="knowledge-hero-bg" />
+        <motion.h1
+          className="section-title"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Technical <span className="highlight">Knowledge</span>
+        </motion.h1>
+        <motion.p
+          className="knowledge-subtitle"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          Click any card to explore skills in depth
+        </motion.p>
+      </div>
+
+      <div className="knowledge-grid">
+        {skills.map((skill, i) => (
+          <FlipCard key={skill.name} skill={skill} delay={i * 0.06} />
         ))}
-      </main>
+      </div>
     </section>
   );
 }

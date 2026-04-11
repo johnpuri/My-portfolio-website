@@ -1,222 +1,154 @@
+/* =============================================
+   CONTACT MODAL — Modern glassmorphism
+   ============================================= */
+
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(0, 0, 10, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
+  justify-content: center;
+  padding: 20px;
 }
 
 .modal-content {
-  background: rgba(15, 23, 42, 0.95);
-  border-radius: 16px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
-  animation: modalFadeIn 0.3s ease-out;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 36px;
+  background: rgba(10, 10, 30, 0.9) !important;
+  border: 1px solid rgba(108, 99, 255, 0.25) !important;
+  box-shadow: 0 0 80px rgba(108, 99, 255, 0.25), 0 40px 80px rgba(0, 0, 0, 0.6);
 }
 
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.close-button {
+.modal-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   transition: all 0.2s ease;
 }
 
-.close-button:hover {
-  background: rgba(255, 255, 255, 0.1);
+.modal-close:hover {
+  background: rgba(255, 80, 80, 0.15);
+  border-color: rgba(255, 80, 80, 0.4);
+  color: #ff8080;
 }
 
-.modal-content h2 {
-  color: white;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  font-weight: 700;
+.modal-header {
+  margin-bottom: 28px;
 }
 
+.modal-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.modal-header p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Social links */
 .social-links {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .social-link {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  color: white;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
   text-decoration: none;
-  transition: transform 0.3s ease;
+  transition: all 0.25s ease;
+  color: var(--text-primary);
 }
 
 .social-link:hover {
-  transform: translateY(-5px);
+  background: rgba(108, 99, 255, 0.08);
+  border-color: rgba(108, 99, 255, 0.35);
+  transform: translateX(4px);
+  color: var(--text-primary);
 }
 
 .social-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
-  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .social-icon svg {
-  width: 30px;
-  height: 30px;
-  fill: white;
+  width: 22px;
+  height: 22px;
 }
 
-.social-icon.github {
-  background: linear-gradient(135deg, #333, #171515);
+.github-icon {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
 }
 
-.social-icon.email {
-  background: linear-gradient(135deg, #D44638, #B23121);
+.email-icon {
+  background: rgba(234, 67, 53, 0.12);
+  color: #ea4335;
 }
 
-.social-icon.linkedin {
-  background: linear-gradient(135deg, #0077B5, #0e5a8a);
+.linkedin-icon {
+  background: rgba(0, 119, 181, 0.12);
+  color: #0077b5;
 }
 
-.social-link span {
-  font-size: 0.9rem;
-  font-weight: 500;
+.social-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-@media (max-width: 768px) {
-  .modal-content {
-    width: 95%;
-    max-width: 450px;
-    padding: 1.75rem;
-  }
-  
-  .modal-content h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1.75rem;
-  }
-  
-  .social-links {
-    gap: 1.5rem;
-  }
-  
-  .social-icon {
-    width: 55px;
-    height: 55px;
-  }
-  
-  .social-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .social-link span {
-    font-size: 0.85rem;
-  }
+.social-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
-@media (max-width: 480px) {
-  .modal-overlay {
-    padding: 1rem;
-  }
-  
-  .modal-content {
-    width: 100%;
-    max-width: 100%;
-    padding: 1.5rem;
-    border-radius: 12px;
-  }
-  
-  .close-button {
-    top: 10px;
-    right: 10px;
-    width: 35px;
-    height: 35px;
-    font-size: 1.3rem;
-  }
-  
-  .modal-content h2 {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .social-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  
-  .social-icon {
-    width: 50px;
-    height: 50px;
-    min-width: 50px; /* Touch-friendly */
-    min-height: 50px; /* Touch-friendly */
-  }
-  
-  .social-icon svg {
-    width: 25px;
-    height: 25px;
-  }
-  
-  .social-link {
-    min-width: 80px;
-  }
-  
-  .social-link span {
-    font-size: 0.8rem;
-  }
+.social-handle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
 }
 
-@media (max-width: 360px) {
-  .modal-content {
-    padding: 1.25rem;
-  }
-  
-  .modal-content h2 {
-    font-size: 1.3rem;
-  }
-  
-  .social-icon {
-    width: 45px;
-    height: 45px;
-  }
-  
-  .social-icon svg {
-    width: 22px;
-    height: 22px;
-  }
+.social-arrow {
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: transform 0.2s ease, color 0.2s;
+}
+
+.social-link:hover .social-arrow {
+  transform: translateX(4px);
+  color: var(--accent-primary);
 }
