@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -6,6 +6,9 @@ import School from './components/School';
 import CV from './components/CV';
 import Knowledge from './components/Knowledge';
 import TerminalAnimation from './components/TerminalAnimation';
+import Cursor from './components/Cursor';
+import SocialIcons from './components/SocialIcons';
+import { LoadingProvider } from './context/LoadingProvider';
 import './App.css';
 
 function App() {
@@ -18,35 +21,36 @@ function App() {
     setShowContent(true);
   };
 
-  // Show animation on every page load
   useEffect(() => {
-    // Always show the animation on page load
     setShowAnimation(true);
     setShowContent(false);
-    
-    // Safety timeout - force content to show after 35 seconds in case animation gets stuck
     const safetyTimer = setTimeout(() => {
       setShowAnimation(false);
       setShowContent(true);
-    }, 35000); // Increased safety timer
-    
+    }, 35000); 
     return () => clearTimeout(safetyTimer);
   }, []);
 
   return (
     <Router>
-      <main className="App">
-        {showAnimation && <TerminalAnimation onComplete={handleAnimationComplete} />}
-        <div className={`app-content ${showContent ? 'visible' : 'hidden'}`}>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/school" element={<School />} />
-            <Route path="/cv" element={<CV />} />
-            <Route path="/knowledge" element={<Knowledge />} />
-          </Routes>
-        </div>
-      </main>
+      <LoadingProvider>
+        <Suspense>
+          <main className="App main-body">
+            {showAnimation && <TerminalAnimation onComplete={handleAnimationComplete} />}
+            <div className={`app-content ${showContent ? 'visible' : 'hidden'}`}>
+              <Cursor />
+              <Navbar />
+              <SocialIcons />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/school" element={<School />} />
+                <Route path="/cv" element={<CV />} />
+                <Route path="/knowledge" element={<Knowledge />} />
+              </Routes>
+            </div>
+          </main>
+        </Suspense>
+      </LoadingProvider>
     </Router>
   );
 }

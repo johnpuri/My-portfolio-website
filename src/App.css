@@ -1,31 +1,28 @@
-/* App Shell */
-.App {
-  min-height: 100vh;
-  background-color: var(--bg-primary);
-  position: relative;
+.section-container {
+  width: 1300px;
 }
-
-.app-content {
-  min-height: 100vh;
+.title,
+.para {
+  font-kerning: none;
+  -webkit-text-rendering: optimizeSpeed;
+  text-rendering: optimizeSpeed;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
-
-.app-content.hidden {
-  opacity: 0;
-  pointer-events: none;
+@media only screen and (max-width: 1600px) {
+  .section-container {
+    width: 1200px;
+    max-width: calc(100% - 160px);
+  }
 }
-
-.app-content.visible {
-  opacity: 1;
-  animation: fadeInApp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+@media only screen and (max-width: 1400px) {
+  .section-container {
+    width: 900px;
+  }
 }
-
-@keyframes fadeInApp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Page content sits above 3D canvas */
-.page-wrapper {
-  position: relative;
-  z-index: 1;
+@media only screen and (max-width: 900px) {
+  .section-container {
+    width: 500px;
+    max-width: var(--cWidth);
+  }
 }
