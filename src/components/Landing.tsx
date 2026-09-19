@@ -1,7 +1,14 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import "./styles/Landing.css";
+import { initialFX } from "./utils/initialFX";
 
 const Landing = ({ children }: PropsWithChildren) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      initialFX();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       <div className="landing-section" id="landingDiv">

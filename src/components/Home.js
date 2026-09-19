@@ -16,37 +16,34 @@ const Home = () => {
   );
 
   useEffect(() => {
+    let timeout;
     const resizeHandler = () => {
-      setSplitText();
-      setIsDesktopView(window.innerWidth > 1024);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setSplitText();
+        setIsDesktopView(window.innerWidth > 1024);
+      }, 150);
     };
-    resizeHandler();
+    setSplitText();
     window.addEventListener("resize", resizeHandler);
     return () => {
+      clearTimeout(timeout);
       window.removeEventListener("resize", resizeHandler);
     };
-  }, [isDesktopView]);
+  }, []);
 
   return (
     <div className="container-main">
-      {/* Absolute / Fixed Character overlay for desktop */}
-      {isDesktopView && (
-        <Suspense fallback={null}>
-          <CharacterModel />
-        </Suspense>
-      )}
+      {/* Single persistent Character instance across desktop and mobile */}
+      <Suspense fallback={null}>
+        <CharacterModel />
+      </Suspense>
 
       {/* GSAP ScrollSmoother container structure */}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="container-main">
-            <Landing>
-              {!isDesktopView && (
-                <Suspense fallback={null}>
-                  <CharacterModel />
-                </Suspense>
-              )}
-            </Landing>
+            <Landing />
             <About />
             <WhatIDo />
             <Career />
